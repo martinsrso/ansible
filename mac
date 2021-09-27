@@ -1,1 +1,2 @@
 defaults -currentHost write -g AppleFontSmoothing -int 0
+ansible-playbook local.yml --ask-vault-pass --ask-become-pass

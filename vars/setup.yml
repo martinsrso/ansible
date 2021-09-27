@@ -1,15 +1,13 @@
 brew_cask_packages:
-  - google-chrome
   - zoom
+  - amethyst
   - firefox
   - slack
   - visual-studio-code
   - alfred
   - bitwarden
-  - macs-fan-control
   - iterm2
   - kitty
-  - intellij-idea
 
 brew_packages:
   - bat
@@ -28,7 +26,6 @@ brew_packages:
   - lua
   - nodejs
   - npm
-  - yarn
   - luarocks
   - tree
   - neovim

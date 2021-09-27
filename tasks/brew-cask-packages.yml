@@ -1,8 +1,13 @@
 - name: Installing Homebrew Cask Packages
   homebrew_cask:
-    name: "{{ brew_cask_packages }}"
+    name: "{{ item }}"
     state: present
   register: result
-  until: result is successful
+  loop: '{{ brew_cask_packages }}'
+  failed_when: >
+    (result.changed != true)
+  changed_when: >
+    ("Error" in result.msg) or
+    (result is successful)
   when: homebrew_check.stat.exists
 

@@ -12,15 +12,21 @@
     - zsh
 
 - name: Change shell to zsh
-  shell: chsh -s $(which zsh)
+  shell: chsh -s /bin/zsh
   tags:
     - install
     - dotfiles
     - productivity
     - zsh
 
+- name: Ensure OMF is installled
+  stat:
+    path: "$HOME/.oh-my-zsh/"
+  register: omf_check
+
 - name: Oh-My-Zsh
   shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+  when: not omf_check.stat.exists
   tags:
     - install
     - productivity

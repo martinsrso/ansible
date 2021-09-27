@@ -1,0 +1,52 @@
+- name: Ensure SDKMan is installled
+  stat:
+    path: "$HOME/.sdkman/bin/sdkman-init.sh"
+  register: sdkman_check
+
+- name: Installing SDKMan
+  shell: "{{ item }}"
+  with_items:
+    - curl -s "https://get.sdkman.io" | bash
+    - echo "source "$HOME/.sdkman/bin/sdkman-init.sh"" >> $HOME/.bashrc
+  when:
+    - not sdkman_check.stat.exists
+
+- name: Get SDK defaults
+  shell: . $HOME/.sdkman/bin/sdkman-init.sh && sdk current {{ item }}
+  args:
+    executable: /bin/bash
+  register: get_sdk_defaults
+  changed_when: false
+  loop: >-
+    {{ sdkman_install_packages | map(attribute="candidate") | unique | list }}
+
+- name: Installing SDK candidates/version
+  shell: >-
+    . $HOME/.sdkman/bin/sdkman-init.sh &&
+    sdk install {{ item.candidate }} {{ item.version | default('') }}
+  args:
+      executable: /bin/bash
+  loop: '{{ sdkman_install_packages }}'
+  register: sdk_install
+  changed_when: >-
+    'is already installed.' not in sdk_install.stdout
+  failed_when: >-
+    sdk_install.rc != 0 and
+    'is already installed.' not in sdk_install.stdout
+  when:
+    - sdkman_check.stat.exists
+
+- name: Set SDK defaults
+  shell: >-
+    . $HOME/.sdkman/bin/sdkman-init.sh &&
+    sdk default {{ item.key }} {{ item.value }}
+  args:
+    executable: /bin/bash
+  loop: '{{ sdkman_defaults | dict2items }}'
+  changed_when: >-
+    not item.value in
+    (get_sdk_defaults.results |
+     selectattr('item', 'equalto', item.key) |
+     first).stdout
+  when:
+    - sdkman_check.stat.exists

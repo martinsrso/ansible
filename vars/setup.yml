@@ -1,0 +1,61 @@
+brew_cask_packages:
+  - google-chrome
+  - zoom
+  - firefox
+  - slack
+  - visual-studio-code
+  - alfred
+  - bitwarden
+  - macs-fan-control
+  - iterm2
+  - kitty
+  - intellij-idea
+
+brew_packages:
+  - bat
+  - tldr
+  - svn
+  - wget
+  - editorconfig
+  - fd
+  - findutils
+  - go
+  - htop
+  - helm
+  - lazygit
+  - lf
+  - lsd
+  - lua
+  - nodejs
+  - npm
+  - yarn
+  - luarocks
+  - tree
+  - neovim
+  - zsh
+  - fish
+  - terraform
+  - terraform-ls
+  - tmux
+  - docker
+  - docker-compose
+  - ripgrep
+  - fzf
+  - pyenv
+
+sdkman_install_packages:
+  - { candidate: java, version:  16.0.1.hs-adpt }
+  - { candidate: maven, version: 3.8.2 }
+sdkman_defaults:
+  maven: 3.8.2
+  java: 16.0.1.hs-adpt
+
+fonts:
+  - font-jetbrains-mono
+  - font-source-code-pro
+
+source_key: "./.ssh/id_ed25519"
+dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
+
+psource_key: "./.ssh/id_ed25519.pub"
+pdest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519.pub"

@@ -1,0 +1,19 @@
+- name: Install MacOS Packages
+  hosts: localhost
+  become: false
+  vars:
+    install_homebrew_if_missing: true
+    upgrade_homebrew_packages: false
+  vars_files:
+    - vars/setup.yml
+  pre_tasks:
+    - import_tasks: tasks/brew-setup.yml
+  tasks:
+    - include_tasks: tasks/brew-packages.yml
+    - include_tasks: tasks/brew-cask-packages.yml
+    - include_tasks: tasks/font-setup.yml
+    - include_tasks: tasks/node-setup.yml
+    - include_tasks: tasks/npm-packages.yml
+    - include_tasks: tasks/sdk-setup.yml
+    - include_tasks: tasks/zsh-setup.yml
+    - include_tasks: tasks/ssh.yml

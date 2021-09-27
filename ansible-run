@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+## install xcode-select
+xcode-select --install
+
+## Install ansible
+sudo easy_install pip
+sudo pip install ansible --quiet
+sudo pip install ansible --upgrade
+
+## pull ansible
+ansible-pull -U https://github.com/martinsrso/ansible.git

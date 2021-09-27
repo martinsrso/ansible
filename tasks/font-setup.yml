@@ -1,0 +1,18 @@
+- name: Homebrew tap cask fonts
+  homebrew_tap:
+    name: homebrew/cask-fonts
+    state: present
+  register: result
+  until: result is successful
+  when: homebrew_check.stat.exists
+
+- name: Installing fonts
+  ignore_errors: yes
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  register: result
+  loop: '{{ fonts }}'
+  changed_when: >-
+    'already installed' not in result.msg or result is successful
+  when: homebrew_check.stat.exists

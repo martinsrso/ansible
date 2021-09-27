@@ -1,0 +1,24 @@
+- name: Install nodejs and npm
+  homebrew:
+    name: ["nodejs", "npm"]
+    state: present
+  register: result
+  until: result is successful
+  when: homebrew_check.stat.exists
+  tags:
+    - install
+    - node
+
+- name: Install N
+  npm:
+    name: n
+    global: yes
+  tags:
+    - install
+    - node
+
+- name: Install correct version of Node
+  shell: n lts
+  tags:
+    - install
+    - node

@@ -1,14 +1,3 @@
-- name: Install nodejs and npm
-  homebrew:
-    name: ["nodejs", "npm"]
-    state: present
-  register: result
-  until: result is successful
-  when: homebrew_check.stat.exists
-  tags:
-    - install
-    - node
-
 - name: Install N
   npm:
     name: n
@@ -18,7 +7,8 @@
     - node
 
 - name: Install correct version of Node
-  shell: n lts
+  shell: >- 
+    sudo mkdir -p /usr/local/n && sudo chown -R $(whoami) /usr/local/n && n lts
   tags:
     - install
     - node

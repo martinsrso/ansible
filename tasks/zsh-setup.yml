@@ -1,32 +1,11 @@
-- name: Install ZSH
-  homebrew:
-    name: zsh
-    state: present
-  register: result
-  until: result is successful
-  when: homebrew_check.stat.exists
-  tags:
-    - install
-    - productivity
-    - dotfiles
-    - zsh
-
-- name: Change shell to zsh
-  shell: chsh -s /bin/zsh
-  tags:
-    - install
-    - dotfiles
-    - productivity
-    - zsh
-
-- name: Ensure OMF is installled
+- name: Ensure OMZ is installled
   stat:
     path: "$HOME/.oh-my-zsh/"
   register: omf_check
 
 - name: Oh-My-Zsh
   shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-  when: not omf_check.stat.exists
+  when: not omz_check.stat.exists
   tags:
     - install
     - productivity

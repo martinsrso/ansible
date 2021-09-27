@@ -2,11 +2,12 @@
 
 ## install xcode-select
 xcode-select --install
+sudo xcodebuild -license accept
 
-## Install ansible
-sudo easy_install pip
-sudo pip install ansible --quiet
-sudo pip install ansible --upgrade
+## Install brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install ansible
 
 ## pull ansible
-ansible-pull -U https://github.com/martinsrso/ansible.git
+ansible-playbook local.yml --ask-vault-pass --ask-become-pass
+# ansible-pull -U https://github.com/martinsrso/ansible.git

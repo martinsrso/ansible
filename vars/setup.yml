@@ -1,5 +1,6 @@
 brew_cask_packages:
   - zoom
+  - brave
   - amethyst
   - firefox
   - slack
@@ -8,6 +9,7 @@ brew_cask_packages:
   - bitwarden
   - iterm2
   - kitty
+  - docker
 
 brew_packages:
   - bat
@@ -34,15 +36,16 @@ brew_packages:
   - terraform
   - terraform-ls
   - tmux
-  - docker
-  - docker-compose
   - ripgrep
   - fzf
   - pyenv
+  - rust
+  - stow
 
 sdkman_install_packages:
   - { candidate: java, version:  16.0.1.hs-adpt }
   - { candidate: maven, version: 3.8.2 }
+  - { candidate: kotlin }
 sdkman_defaults:
   maven: 3.8.2
   java: 16.0.1.hs-adpt

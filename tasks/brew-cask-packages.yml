@@ -10,4 +10,3 @@
     ("Error" in result.msg) or
     (result is successful)
   when: homebrew_check.stat.exists
-

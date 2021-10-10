@@ -3,6 +3,7 @@
     repo: 'git@github.com:martinsrso/.dotfiles.git'
     dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
     update: yes
+    force: yes
     accept_hostkey: yes
     version: main
   tags:

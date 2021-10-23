@@ -1,3 +1,0 @@
-docker build . -t new-computer
-docker build . -f nvim.Dockerfile -t nvim-computer
-docker build . -f ubuntu.Dockerfile -t ubuntu-computer
